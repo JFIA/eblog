@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rafel.eblog.resources.mapper.PostMapper">
+
+    <select id="selectPosts" resultType="com.example.vo.PostVo">
+        SELECT
+            p.*,
+
+            u.id AS authorId,
+            u.username AS authorName,
+            u.avatar AS authorAvatar,
+
+            c.id AS categoryId,
+            c.name AS categoryName
+        FROM
+            m_post p
+        LEFT JOIN m_user u ON p.user_id = u.id
+        LEFT JOIN m_category c ON p.category_id = c.id
+
+        ${ew.customSqlSegment}
+
+    </select>
+
+    <select id="selectOnePost" resultType="com.example.vo.PostVo">
+        SELECT
+            p.*,
+
+            u.id AS authorId,
+            u.username AS authorName,
+            u.avatar AS authorAvatar,
+
+            c.id AS categoryId,
+            c.name AS categoryName
+        FROM
+            m_post p
+        LEFT JOIN m_user u ON p.user_id = u.id
+        LEFT JOIN m_category c ON p.category_id = c.id
+
+        ${ew.customSqlSegment}
+
+    </select>
+
+
+</mapper>

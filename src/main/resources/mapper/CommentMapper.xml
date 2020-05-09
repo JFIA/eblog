@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rafel.eblog.resources.CommentMapper">
+
+    <select id="selectComments" resultType="com.example.vo.CommentVo">
+        SELECT
+            c.*,
+
+            u.id AS authorId,
+            u.username AS authorName,
+            u.avatar AS authorAvatar
+        FROM
+            m_comment c
+        LEFT JOIN m_user u ON c.user_id = u.id
+
+        ${ew.customSqlSegment}
+
+    </select>
+
+</mapper>
