@@ -25,5 +25,5 @@ public interface UserMessageMapper extends BaseMapper<UserMessage> {
 
     @Transactional
     @Update("update user_message set status = 1 ${ew.customSqlSegment}")
-    void updateToReaded(@Param(Constants.WRAPPER) QueryWrapper<UserMessage> wrapper);
+    void updateToRead(@Param(Constants.WRAPPER) QueryWrapper<UserMessage> wrapper);
 }

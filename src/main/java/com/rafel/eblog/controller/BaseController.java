@@ -2,9 +2,9 @@ package com.rafel.eblog.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.rafel.eblog.service.CommentService;
-import com.rafel.eblog.service.PostService;
-import com.rafel.eblog.service.UserService;
+import com.rafel.eblog.mapper.UserCollectionMapper;
+import com.rafel.eblog.mapper.UserMessageMapper;
+import com.rafel.eblog.service.*;
 import com.rafel.eblog.shiro.AccountProfile;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,18 @@ public class BaseController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserMessageService messageService;
+
+    @Autowired
+    UserCollectionService collectionService;
+
+    @Autowired
+    CategoryService categoryService;
+
+    @Autowired
+    WsService wsService;
+
     public Page getPage() {
 
         int pn = ServletRequestUtils.getIntParameter(req, "pn", 1);
@@ -43,7 +55,7 @@ public class BaseController {
         return (AccountProfile) SecurityUtils.getSubject().getPrincipal();
     }
 
-    public long getProfileById() {
+    public Long getProfileById() {
 
         return getProfile().getId();
     }

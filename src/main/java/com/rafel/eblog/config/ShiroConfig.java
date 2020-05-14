@@ -2,6 +2,7 @@ package com.rafel.eblog.config;
 
 import cn.hutool.core.map.MapUtil;
 import com.rafel.eblog.shiro.AccountRealm;
+import com.rafel.eblog.shiro.AuthFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -38,7 +39,7 @@ public class ShiroConfig {
         // 配置未授权跳转页面
         filterFactoryBean.setUnauthorizedUrl("/error/403");
 
-//        filterFactoryBean.setFilters(MapUtil.of("auth", authFilter()));
+        filterFactoryBean.setFilters(MapUtil.of("auth", authFilter()));
 
         Map<String, String> hashMap = new LinkedHashMap<>();
 
@@ -71,8 +72,9 @@ public class ShiroConfig {
 
     }
 
-//    @Bean
-//    public AuthFilter authFilter() {
-//        return new AuthFilter();
-//    }
+    // 注入过滤器
+    @Bean
+    public AuthFilter authFilter() {
+        return new AuthFilter();
+    }
 }

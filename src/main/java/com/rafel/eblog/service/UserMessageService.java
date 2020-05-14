@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rafel.eblog.entity.UserMessage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,9 +15,11 @@ import java.util.List;
  * </p>
  *
  */
+
+
 public interface UserMessageService extends IService<UserMessage> {
 
     IPage paging(Page page, QueryWrapper<UserMessage> wrapper);
 
-    void updateToReaded(List<Long> ids);
+    void updateToRead(List<Long> ids);
 }

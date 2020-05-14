@@ -1,7 +1,7 @@
 package com.rafel.eblog.common.exception;
 
 import cn.hutool.json.JSONUtil;
-import com.example.common.lang.Result;
+import com.rafel.eblog.common.lang.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,26 +12,32 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 全局异常处理
+ *  全局异常处理
+ *  @ControllerAdvice可以实现
+ * 1.全局异常处理
+ * 2.全局数据绑定
+ * 3.全局数据预处理i
  */
 @Slf4j
 @ControllerAdvice
-public class GlobalExcepitonHandler {
+
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView handler(HttpServletRequest req, HttpServletResponse resp, Exception e) throws IOException {
 
         // ajax 处理
         String header = req.getHeader("X-Requested-With");
-        if(header != null  && "XMLHttpRequest".equals(header)) {
+        if ("XMLHttpRequest".equals(header)) {
             resp.setContentType("application/json;charset=UTF-8");
             resp.getWriter().print(JSONUtil.toJsonStr(Result.fail(e.getMessage())));
             return null;
         }
 
-        if(e instanceof NullPointerException) {
-            // ...
-        }
+        // 处理空指针异常
+//        if (e instanceof NullPointerException) {
+//
+//        }
 
         // web处理
         ModelAndView modelAndView = new ModelAndView("error");
