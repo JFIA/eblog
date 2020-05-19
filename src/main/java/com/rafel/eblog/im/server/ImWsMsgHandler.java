@@ -2,9 +2,9 @@ package com.rafel.eblog.im.server;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.json.JSONUtil;
-import com.example.common.lang.Consts;
-import com.example.im.handler.MsgHandler;
-import com.example.im.handler.MsgHandlerFactory;
+import com.rafel.eblog.common.lang.Consts;
+import com.rafel.eblog.im.handler.MsgHandler;
+import com.rafel.eblog.im.handler.MsgHandlerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.tio.core.ChannelContext;
 import org.tio.core.Tio;

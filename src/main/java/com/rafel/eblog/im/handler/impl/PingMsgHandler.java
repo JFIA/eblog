@@ -1,6 +1,6 @@
 package com.rafel.eblog.im.handler.impl;
 
-import com.example.im.handler.MsgHandler;
+import com.rafel.eblog.im.handler.MsgHandler;
 import org.tio.core.ChannelContext;
 import org.tio.websocket.common.WsRequest;
 

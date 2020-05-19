@@ -8,7 +8,7 @@
                 <a href="/"><i class="iconfont icon-jiaoliu"></i>主页</a>
             </li>
             <li class="layui-nav-item">
-                <a target="_blank" href="https://mp.weixin.qq.com/s/lR5LC5GnD2Gs59ecV5R0XA"><i class=""></i>最新企业面试题</a>
+                <a target="_blank" href="https://github.com/JFIA?tab=repositories"><i class=""></i>详情请浏览GitHub</a>
             </li>
         </ul>
 

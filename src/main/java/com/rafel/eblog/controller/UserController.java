@@ -113,7 +113,7 @@ public class UserController extends BaseController {
     public Result collection() {
 
         IPage page = postService.page(getPage(), new QueryWrapper<Post>()
-                .inSql("id", "SELECT post_id FROM user_collection where user_id = " + getProfileById()));
+                .inSql("id", "SELECT post_id FROM m_user_collection where user_id = " + getProfileById()));
 
         return Result.success(page);
     }

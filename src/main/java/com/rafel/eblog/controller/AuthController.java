@@ -43,12 +43,12 @@ public class AuthController extends BaseController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "/auth/login";
     }
 
     @GetMapping("/register")
     public String register() {
-        return "reg";
+        return "/auth/reg";
     }
 
     @ResponseBody
@@ -77,7 +77,7 @@ public class AuthController extends BaseController {
 
     @ResponseBody
     @PostMapping("/register")
-    public Result doRegister(User user, String repass, String verCode) {
+    public Result doRegister(User user, String repass, @RequestParam(value = "vercode") String verCode) {
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(user);
 
         if (validResult.hasErrors()) {
@@ -90,7 +90,7 @@ public class AuthController extends BaseController {
 
         String kaptcha_session_key = (String) req.getSession().getAttribute("KAPTCHA_SESSION_KEY");
 
-        if (verCode == null || !kaptcha_session_key.equalsIgnoreCase(KAPTCHA_SESSION_KEY)) {
+        if (verCode == null || !verCode.equalsIgnoreCase(kaptcha_session_key)) {
             return Result.fail("验证码错误!");
         }
 

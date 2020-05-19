@@ -1,7 +1,7 @@
 package com.rafel.eblog.im.message;
 
-import com.example.im.vo.ImTo;
-import com.example.im.vo.ImUser;
+import com.rafel.eblog.im.vo.ImTo;
+import com.rafel.eblog.im.vo.ImUser;
 import lombok.Data;
 
 @Data

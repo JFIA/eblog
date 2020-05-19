@@ -1,6 +1,6 @@
 package com.rafel.eblog.im.message;
 
-import com.example.im.vo.ImMess;
+import com.rafel.eblog.im.vo.ImMess;
 import lombok.Data;
 
 @Data

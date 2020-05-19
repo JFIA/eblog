@@ -6,7 +6,9 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.rafel.eblog.common.lang.Result;
+import com.rafel.eblog.config.RabbitConfig;
 import com.rafel.eblog.entity.*;
+import com.rafel.eblog.search.mq.PostMqIndexMessage;
 import com.rafel.eblog.util.ValidationUtil;
 import com.rafel.eblog.vo.CommentVo;
 import com.rafel.eblog.vo.PostVo;
@@ -94,7 +96,7 @@ public class PostController extends BaseController {
     public Result collectionRemove(@RequestParam long pid) {
 
         Post post = postService.getById(pid);
-        Assert.isTrue(post != null, "改帖子已被删除");
+        Assert.isTrue(post != null, "该帖子已被删除");
 
         collectionService.remove(new QueryWrapper<UserCollection>()
                 .eq("user_id", getProfileById())
@@ -152,6 +154,9 @@ public class PostController extends BaseController {
             postService.updateById(tempPost);
         }
 
+        amqpTemplate.convertAndSend(RabbitConfig.es_exchange, RabbitConfig.es_bind_key,
+                new PostMqIndexMessage(post.getId(), PostMqIndexMessage.CREATE_OR_UPDATE));
+
         return Result.success().action("/post/" + post.getId());
     }
 
@@ -166,12 +171,11 @@ public class PostController extends BaseController {
 
         postService.removeById(id);
 
-        // 删除相关消息、收藏等
         messageService.removeByMap(MapUtil.of("post_id", id));
         collectionService.removeByMap(MapUtil.of("post_id", id));
 
-//        amqpTemplate.convertAndSend(RabbitConfig.es_exchage, RabbitConfig.es_bind_key,
-//                new PostMqIndexMessage(post.getId(), PostMqIndexMessage.REMOVE));
+        amqpTemplate.convertAndSend(RabbitConfig.es_exchange, RabbitConfig.es_bind_key,
+                new PostMqIndexMessage(post.getId(), PostMqIndexMessage.REMOVE));
 
         return Result.success().action("/user/index");
     }
@@ -206,7 +210,7 @@ public class PostController extends BaseController {
 
         // 通知作者，有人评论了你的文章
         // 作者自己评论自己文章，不需要通知
-        if(comment.getUserId() != post.getUserId()) {
+        if (comment.getUserId() != post.getUserId()) {
             UserMessage message = new UserMessage();
             message.setPostId(jid);
             message.setCommentId(comment.getId());
@@ -223,13 +227,13 @@ public class PostController extends BaseController {
         }
 
         // 通知被@的人，有人回复了你的文章
-        if(content.startsWith("@")){
-            String username=content.substring(1, content.indexOf(" "));
+        if (content.startsWith("@")) {
+            String username = content.substring(1, content.indexOf(" "));
 
             User user = userService.getOne(new QueryWrapper<User>()
                     .eq("username", username));
 
-            if (user!=null){
+            if (user != null) {
                 UserMessage message = new UserMessage();
                 message.setPostId(jid);
                 message.setCommentId(comment.getId());
@@ -260,7 +264,7 @@ public class PostController extends BaseController {
 
         Assert.notNull(comment, "找不到对应评论！");
 
-        if(comment.getUserId().longValue() != getProfileById().longValue()) {
+        if (comment.getUserId().longValue() != getProfileById().longValue()) {
             return Result.fail("必须删除自己的评论！");
         }
         commentService.removeById(id);

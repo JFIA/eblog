@@ -1,8 +1,8 @@
 package com.rafel.eblog.im.handler;
 
-import com.example.common.lang.Consts;
-import com.example.im.handler.impl.ChatMsgHandler;
-import com.example.im.handler.impl.PingMsgHandler;
+import com.rafel.eblog.common.lang.Consts;
+import com.rafel.eblog.im.handler.impl.ChatMsgHandler;
+import com.rafel.eblog.im.handler.impl.PingMsgHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;

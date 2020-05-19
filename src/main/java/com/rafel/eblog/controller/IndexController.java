@@ -21,14 +21,14 @@ public class IndexController extends BaseController{
         return "index";
     }
 
-//    @RequestMapping("/search")
-//    public String search(String q) {
-//
-//        IPage pageData = searchService.search(getPage(), q);
-//
-//        req.setAttribute("q", q);
-//        req.setAttribute("pageData", pageData);
-//        return "search";
-//    }
+    @RequestMapping("/search")
+    public String search(String q) {
+
+        IPage pageData = searchService.search(getPage(), q);
+
+        req.setAttribute("q", q);
+        req.setAttribute("pageData", pageData);
+        return "search";
+    }
 
 }

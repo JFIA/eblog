@@ -16,7 +16,7 @@
               <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">邮箱</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" required lay-verify="required" autocomplete="off" class="layui-input" value="11111@qq.com">
+                  <input type="text" id="L_email" name="email" required lay-verify="required" autocomplete="off" class="layui-input" value="873731391@qq.com">
                 </div>
               </div>
               <div class="layui-form-item">
