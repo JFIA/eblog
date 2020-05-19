@@ -30,10 +30,13 @@ public class UserController extends BaseController {
     @Autowired
     UploadUtil uploadUtil;
 
-    @GetMapping("/user/home")
-    public String home() {
+    @GetMapping({"/user/home", "/user/{id:\\d*}"})
+    public String home(@PathVariable Long id) {
 
-        User user = userService.getById(getProfileById());
+        User user;
+        if (id != null) {
+            user = userService.getById(id);
+        } else user = userService.getById(getProfileById());
 
         List<Post> posts = postService.list(new QueryWrapper<Post>()
                 .eq("user_id", getProfileById())
