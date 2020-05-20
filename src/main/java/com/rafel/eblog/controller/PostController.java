@@ -122,6 +122,7 @@ public class PostController extends BaseController {
         return "/post/edit";
     }
 
+    @ResponseBody
     @PostMapping("/post/submit")
     public Result submit(Post post) {
         ValidationUtil.ValidResult validResult = ValidationUtil.validateBean(post);
