@@ -17,5 +17,5 @@
 * 基于mybatis plus快速代码生成
 * 使用shiro+redis完成了会话共享
 * redis的zset结构完成本周热议排行榜
-* t-io+websocket完成即时消息通知和群聊
+* websocket完成即时消息通知
 * 基于rabbitmq+elasticsearch的内容同步与搜索引擎
