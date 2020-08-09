@@ -3,7 +3,7 @@ spring:
   datasource:
     #    driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:p6spy:mysql://127.0.0.1:3306/eblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:p6spy:mysql://192.168.1.197:3306/eblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: 123456
   freemarker:
@@ -11,14 +11,15 @@ spring:
       classic_compatible: true
       datetime_format: yyyy-MM-dd HH:mm
       number_format: 0.##
+
   redis:
-    host: 192.168.1.198
+    host: 127.0.0.1
     port: 6379
     password:
   data:
     elasticsearch:
       cluster-name: my-application
-      cluster-nodes: 192.168.1.198:9300
+      cluster-nodes: 192.168.1.197:9300
       repositories:
         enabled: true
   rabbitmq:
